@@ -18,9 +18,11 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsProgramIdRouteImport } from './routes/programs.$programId'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCommunityRouteImport } from './routes/_app.community'
 import { Route as AppChallengesRouteImport } from './routes/_app.challenges'
 
 const StoreRoute = StoreRouteImport.update({
@@ -67,6 +69,11 @@ const ProgramsProgramIdRoute = ProgramsProgramIdRouteImport.update({
   path: '/$programId',
   getParentRoute: () => ProgramsRoute,
 } as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppProfileRoute = AppProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -80,6 +87,11 @@ const AppOnboardingRoute = AppOnboardingRouteImport.update({
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCommunityRoute = AppCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => AppRoute,
 } as any)
 const AppChallengesRoute = AppChallengesRouteImport.update({
@@ -97,9 +109,11 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
   '/challenges': typeof AppChallengesRoute
+  '/community': typeof AppCommunityRoute
   '/dashboard': typeof AppDashboardRoute
   '/onboarding': typeof AppOnboardingRoute
   '/profile': typeof AppProfileRoute
+  '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
 }
 export interface FileRoutesByTo {
@@ -111,9 +125,11 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
   '/challenges': typeof AppChallengesRoute
+  '/community': typeof AppCommunityRoute
   '/dashboard': typeof AppDashboardRoute
   '/onboarding': typeof AppOnboardingRoute
   '/profile': typeof AppProfileRoute
+  '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
 }
 export interface FileRoutesById {
@@ -127,9 +143,11 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
   '/_app/challenges': typeof AppChallengesRoute
+  '/_app/community': typeof AppCommunityRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/profile': typeof AppProfileRoute
+  '/_app/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
 }
 export interface FileRouteTypes {
@@ -143,9 +161,11 @@ export interface FileRouteTypes {
     | '/signup'
     | '/store'
     | '/challenges'
+    | '/community'
     | '/dashboard'
     | '/onboarding'
     | '/profile'
+    | '/progress'
     | '/programs/$programId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -157,9 +177,11 @@ export interface FileRouteTypes {
     | '/signup'
     | '/store'
     | '/challenges'
+    | '/community'
     | '/dashboard'
     | '/onboarding'
     | '/profile'
+    | '/progress'
     | '/programs/$programId'
   id:
     | '__root__'
@@ -172,9 +194,11 @@ export interface FileRouteTypes {
     | '/signup'
     | '/store'
     | '/_app/challenges'
+    | '/_app/community'
     | '/_app/dashboard'
     | '/_app/onboarding'
     | '/_app/profile'
+    | '/_app/progress'
     | '/programs/$programId'
   fileRoutesById: FileRoutesById
 }
@@ -254,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsProgramIdRouteImport
       parentRoute: typeof ProgramsRoute
     }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/profile': {
       id: '/_app/profile'
       path: '/profile'
@@ -275,6 +306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/community': {
+      id: '/_app/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof AppCommunityRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/challenges': {
       id: '/_app/challenges'
       path: '/challenges'
@@ -287,16 +325,20 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppChallengesRoute: typeof AppChallengesRoute
+  AppCommunityRoute: typeof AppCommunityRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppOnboardingRoute: typeof AppOnboardingRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppProgressRoute: typeof AppProgressRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppChallengesRoute: AppChallengesRoute,
+  AppCommunityRoute: AppCommunityRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppOnboardingRoute: AppOnboardingRoute,
   AppProfileRoute: AppProfileRoute,
+  AppProgressRoute: AppProgressRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -326,12 +368,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
