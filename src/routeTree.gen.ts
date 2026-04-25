@@ -15,14 +15,15 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as CommunityRouteImport } from './routes/community'
-import { Route as ChallengesRouteImport } from './routes/challenges'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsProgramIdRouteImport } from './routes/programs.$programId'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCommunityRouteImport } from './routes/_app.community'
+import { Route as AppChallengesRouteImport } from './routes/_app.challenges'
 
 const StoreRoute = StoreRouteImport.update({
   id: '/store',
@@ -54,16 +55,6 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CommunityRoute = CommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChallengesRoute = ChallengesRouteImport.update({
-  id: '/challenges',
-  path: '/challenges',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -77,6 +68,11 @@ const ProgramsProgramIdRoute = ProgramsProgramIdRouteImport.update({
   id: '/$programId',
   path: '/$programId',
   getParentRoute: () => ProgramsRoute,
+} as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppProfileRoute = AppProfileRouteImport.update({
   id: '/profile',
@@ -93,108 +89,122 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCommunityRoute = AppCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppChallengesRoute = AppChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/challenges': typeof ChallengesRoute
-  '/community': typeof CommunityRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/programs': typeof ProgramsRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/challenges': typeof AppChallengesRoute
+  '/community': typeof AppCommunityRoute
   '/dashboard': typeof AppDashboardRoute
   '/onboarding': typeof AppOnboardingRoute
   '/profile': typeof AppProfileRoute
+  '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/challenges': typeof ChallengesRoute
-  '/community': typeof CommunityRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/programs': typeof ProgramsRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/challenges': typeof AppChallengesRoute
+  '/community': typeof AppCommunityRoute
   '/dashboard': typeof AppDashboardRoute
   '/onboarding': typeof AppOnboardingRoute
   '/profile': typeof AppProfileRoute
+  '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
-  '/challenges': typeof ChallengesRoute
-  '/community': typeof CommunityRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/programs': typeof ProgramsRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/_app/challenges': typeof AppChallengesRoute
+  '/_app/community': typeof AppCommunityRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/profile': typeof AppProfileRoute
+  '/_app/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/challenges'
-    | '/community'
     | '/forgot-password'
     | '/login'
     | '/programs'
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/challenges'
+    | '/community'
     | '/dashboard'
     | '/onboarding'
     | '/profile'
+    | '/progress'
     | '/programs/$programId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/challenges'
-    | '/community'
     | '/forgot-password'
     | '/login'
     | '/programs'
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/challenges'
+    | '/community'
     | '/dashboard'
     | '/onboarding'
     | '/profile'
+    | '/progress'
     | '/programs/$programId'
   id:
     | '__root__'
     | '/'
     | '/_app'
-    | '/challenges'
-    | '/community'
     | '/forgot-password'
     | '/login'
     | '/programs'
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/_app/challenges'
+    | '/_app/community'
     | '/_app/dashboard'
     | '/_app/onboarding'
     | '/_app/profile'
+    | '/_app/progress'
     | '/programs/$programId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
-  ChallengesRoute: typeof ChallengesRoute
-  CommunityRoute: typeof CommunityRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   ProgramsRoute: typeof ProgramsRouteWithChildren
@@ -247,20 +257,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/community': {
-      id: '/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof CommunityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/challenges': {
-      id: '/challenges'
-      path: '/challenges'
-      fullPath: '/challenges'
-      preLoaderRoute: typeof ChallengesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -281,6 +277,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/programs/$programId'
       preLoaderRoute: typeof ProgramsProgramIdRouteImport
       parentRoute: typeof ProgramsRoute
+    }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/profile': {
       id: '/_app/profile'
@@ -303,19 +306,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/community': {
+      id: '/_app/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof AppCommunityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/challenges': {
+      id: '/_app/challenges'
+      path: '/challenges'
+      fullPath: '/challenges'
+      preLoaderRoute: typeof AppChallengesRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppChallengesRoute: typeof AppChallengesRoute
+  AppCommunityRoute: typeof AppCommunityRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppOnboardingRoute: typeof AppOnboardingRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppProgressRoute: typeof AppProgressRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppChallengesRoute: AppChallengesRoute,
+  AppCommunityRoute: AppCommunityRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppOnboardingRoute: AppOnboardingRoute,
   AppProfileRoute: AppProfileRoute,
+  AppProgressRoute: AppProgressRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -335,8 +358,6 @@ const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
-  ChallengesRoute: ChallengesRoute,
-  CommunityRoute: CommunityRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   ProgramsRoute: ProgramsRouteWithChildren,

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, LogOut, User as UserIcon, LayoutDashboard } from "lucide-react";
+import { Menu, X, LogOut, User as UserIcon, LayoutDashboard, TrendingUp } from "lucide-react";
 import { BMLogo } from "./BMLogo";
 import { Button } from "./ui/button";
 import { useAuth } from "@/lib/auth-context";
@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { NotificationsBell } from "./NotificationsBell";
 
 const NAV = [
   { to: "/programs", label: "Programs" },
@@ -63,7 +64,9 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 md:flex">
           {isAuthenticated ? (
-            <DropdownMenu>
+            <>
+              <NotificationsBell />
+              <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 rounded-full ring-1 ring-border transition-smooth hover:ring-foreground/40">
                   <Avatar className="h-9 w-9">
@@ -86,12 +89,16 @@ export function SiteHeader() {
                 <DropdownMenuItem onClick={() => navigate({ to: "/profile" })}>
                   <UserIcon className="mr-2 h-4 w-4" /> Profile
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate({ to: "/progress" })}>
+                  <TrendingUp className="mr-2 h-4 w-4" /> Progress
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="mr-2 h-4 w-4" /> Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            </>
           ) : (
             <>
               <Link to="/login">

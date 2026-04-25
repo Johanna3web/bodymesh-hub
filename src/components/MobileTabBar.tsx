@@ -1,9 +1,10 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Dumbbell, Users, User } from "lucide-react";
+import { Home, Dumbbell, Users, Trophy, User } from "lucide-react";
 
 const ITEMS = [
   { to: "/dashboard", label: "Home", icon: Home },
   { to: "/programs", label: "Programs", icon: Dumbbell },
+  { to: "/challenges", label: "Compete", icon: Trophy },
   { to: "/community", label: "Community", icon: Users },
   { to: "/profile", label: "Profile", icon: User },
 ] as const;
@@ -13,7 +14,7 @@ export function MobileTabBar() {
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/95 backdrop-blur md:hidden">
-      <ul className="grid grid-cols-4">
+      <ul className="grid grid-cols-5">
         {ITEMS.map((item) => {
           const Icon = item.icon;
           const active = location.pathname === item.to || location.pathname.startsWith(item.to + "/");
