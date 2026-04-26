@@ -20,9 +20,10 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export const Route = createFileRoute("/login")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    redirect: (search.redirect as string | undefined) ?? undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const r = search.redirect;
+    return typeof r === "string" && r.length > 0 ? { redirect: r } : {};
+  },
   head: () => ({
     meta: [
       { title: "Log in — BODYMESH" },
@@ -56,7 +57,7 @@ function LoginPage() {
       return;
     }
     toast.success("Welcome back");
-    navigate({ to: search.redirect });
+    navigate({ to: search.redirect ?? "/dashboard" });
   };
 
   return (
