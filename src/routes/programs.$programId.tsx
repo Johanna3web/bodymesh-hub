@@ -16,6 +16,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
+import { LazyVideo } from "@/components/LazyVideo";
 
 interface Exercise {
   name: string;
@@ -210,8 +211,12 @@ function ProgramDetailPage() {
                   <CheckCircle2 className="mr-2 h-4 w-4" /> Enrolled
                 </Badge>
               ) : locked ? (
-                <Button size="lg" variant="outline" disabled>
-                  <Lock className="mr-2 h-4 w-4" /> Premium required
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => toast.info("Premium checkout is coming soon — PayFast integration is on the way.")}
+                >
+                  <Lock className="mr-2 h-4 w-4" /> Unlock with Premium
                 </Button>
               ) : (
                 <Button
@@ -302,6 +307,11 @@ function ProgramDetailPage() {
                         </AccordionTrigger>
                         <AccordionContent>
                           {w.description && <p className="mb-4 text-sm text-muted-foreground">{w.description}</p>}
+                          {w.video_url && (
+                            <div className="mb-4">
+                              <LazyVideo src={w.video_url} title={w.title} poster={w.thumbnail_url} />
+                            </div>
+                          )}
                           <div className="space-y-2">
                             {exercises.map((ex, i) => (
                               <div key={i} className="flex items-center justify-between rounded-md bg-muted/50 px-4 py-3 text-sm">

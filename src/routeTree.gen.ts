@@ -16,6 +16,7 @@ import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsProgramIdRouteImport } from './routes/programs.$programId'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
@@ -24,6 +25,13 @@ import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCommunityRouteImport } from './routes/_app.community'
 import { Route as AppChallengesRouteImport } from './routes/_app.challenges'
+import { Route as AdminAdminRouteImport } from './routes/_admin.admin'
+import { Route as AdminAdminUsersRouteImport } from './routes/_admin.admin.users'
+import { Route as AdminAdminProgramsRouteImport } from './routes/_admin.admin.programs'
+import { Route as AdminAdminOverviewRouteImport } from './routes/_admin.admin.overview'
+import { Route as AdminAdminCommunityRouteImport } from './routes/_admin.admin.community'
+import { Route as AdminAdminChallengesRouteImport } from './routes/_admin.admin.challenges'
+import { Route as AdminAdminAnalyticsRouteImport } from './routes/_admin.admin.analytics'
 
 const StoreRoute = StoreRouteImport.update({
   id: '/store',
@@ -57,6 +65,10 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 } as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -99,6 +111,41 @@ const AppChallengesRoute = AppChallengesRouteImport.update({
   path: '/challenges',
   getParentRoute: () => AppRoute,
 } as any)
+const AdminAdminRoute = AdminAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminUsersRoute = AdminAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminAdminRoute,
+} as any)
+const AdminAdminProgramsRoute = AdminAdminProgramsRouteImport.update({
+  id: '/programs',
+  path: '/programs',
+  getParentRoute: () => AdminAdminRoute,
+} as any)
+const AdminAdminOverviewRoute = AdminAdminOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => AdminAdminRoute,
+} as any)
+const AdminAdminCommunityRoute = AdminAdminCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => AdminAdminRoute,
+} as any)
+const AdminAdminChallengesRoute = AdminAdminChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
+  getParentRoute: () => AdminAdminRoute,
+} as any)
+const AdminAdminAnalyticsRoute = AdminAdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminAdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -108,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/admin': typeof AdminAdminRouteWithChildren
   '/challenges': typeof AppChallengesRoute
   '/community': typeof AppCommunityRoute
   '/dashboard': typeof AppDashboardRoute
@@ -115,6 +163,12 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AppProfileRoute
   '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
+  '/admin/analytics': typeof AdminAdminAnalyticsRoute
+  '/admin/challenges': typeof AdminAdminChallengesRoute
+  '/admin/community': typeof AdminAdminCommunityRoute
+  '/admin/overview': typeof AdminAdminOverviewRoute
+  '/admin/programs': typeof AdminAdminProgramsRoute
+  '/admin/users': typeof AdminAdminUsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -124,6 +178,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/admin': typeof AdminAdminRouteWithChildren
   '/challenges': typeof AppChallengesRoute
   '/community': typeof AppCommunityRoute
   '/dashboard': typeof AppDashboardRoute
@@ -131,10 +186,17 @@ export interface FileRoutesByTo {
   '/profile': typeof AppProfileRoute
   '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
+  '/admin/analytics': typeof AdminAdminAnalyticsRoute
+  '/admin/challenges': typeof AdminAdminChallengesRoute
+  '/admin/community': typeof AdminAdminCommunityRoute
+  '/admin/overview': typeof AdminAdminOverviewRoute
+  '/admin/programs': typeof AdminAdminProgramsRoute
+  '/admin/users': typeof AdminAdminUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
   '/_app': typeof AppRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -142,6 +204,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/_admin/admin': typeof AdminAdminRouteWithChildren
   '/_app/challenges': typeof AppChallengesRoute
   '/_app/community': typeof AppCommunityRoute
   '/_app/dashboard': typeof AppDashboardRoute
@@ -149,6 +212,12 @@ export interface FileRoutesById {
   '/_app/profile': typeof AppProfileRoute
   '/_app/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
+  '/_admin/admin/analytics': typeof AdminAdminAnalyticsRoute
+  '/_admin/admin/challenges': typeof AdminAdminChallengesRoute
+  '/_admin/admin/community': typeof AdminAdminCommunityRoute
+  '/_admin/admin/overview': typeof AdminAdminOverviewRoute
+  '/_admin/admin/programs': typeof AdminAdminProgramsRoute
+  '/_admin/admin/users': typeof AdminAdminUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,6 +229,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/admin'
     | '/challenges'
     | '/community'
     | '/dashboard'
@@ -167,6 +237,12 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/programs/$programId'
+    | '/admin/analytics'
+    | '/admin/challenges'
+    | '/admin/community'
+    | '/admin/overview'
+    | '/admin/programs'
+    | '/admin/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -176,6 +252,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/admin'
     | '/challenges'
     | '/community'
     | '/dashboard'
@@ -183,9 +260,16 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/programs/$programId'
+    | '/admin/analytics'
+    | '/admin/challenges'
+    | '/admin/community'
+    | '/admin/overview'
+    | '/admin/programs'
+    | '/admin/users'
   id:
     | '__root__'
     | '/'
+    | '/_admin'
     | '/_app'
     | '/forgot-password'
     | '/login'
@@ -193,6 +277,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/_admin/admin'
     | '/_app/challenges'
     | '/_app/community'
     | '/_app/dashboard'
@@ -200,10 +285,17 @@ export interface FileRouteTypes {
     | '/_app/profile'
     | '/_app/progress'
     | '/programs/$programId'
+    | '/_admin/admin/analytics'
+    | '/_admin/admin/challenges'
+    | '/_admin/admin/community'
+    | '/_admin/admin/overview'
+    | '/_admin/admin/programs'
+    | '/_admin/admin/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AppRoute: typeof AppRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
@@ -264,6 +356,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -320,8 +419,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppChallengesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_admin/admin': {
+      id: '/_admin/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminAdminRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/users': {
+      id: '/_admin/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminAdminUsersRouteImport
+      parentRoute: typeof AdminAdminRoute
+    }
+    '/_admin/admin/programs': {
+      id: '/_admin/admin/programs'
+      path: '/programs'
+      fullPath: '/admin/programs'
+      preLoaderRoute: typeof AdminAdminProgramsRouteImport
+      parentRoute: typeof AdminAdminRoute
+    }
+    '/_admin/admin/overview': {
+      id: '/_admin/admin/overview'
+      path: '/overview'
+      fullPath: '/admin/overview'
+      preLoaderRoute: typeof AdminAdminOverviewRouteImport
+      parentRoute: typeof AdminAdminRoute
+    }
+    '/_admin/admin/community': {
+      id: '/_admin/admin/community'
+      path: '/community'
+      fullPath: '/admin/community'
+      preLoaderRoute: typeof AdminAdminCommunityRouteImport
+      parentRoute: typeof AdminAdminRoute
+    }
+    '/_admin/admin/challenges': {
+      id: '/_admin/admin/challenges'
+      path: '/challenges'
+      fullPath: '/admin/challenges'
+      preLoaderRoute: typeof AdminAdminChallengesRouteImport
+      parentRoute: typeof AdminAdminRoute
+    }
+    '/_admin/admin/analytics': {
+      id: '/_admin/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAdminAnalyticsRouteImport
+      parentRoute: typeof AdminAdminRoute
+    }
   }
 }
+
+interface AdminAdminRouteChildren {
+  AdminAdminAnalyticsRoute: typeof AdminAdminAnalyticsRoute
+  AdminAdminChallengesRoute: typeof AdminAdminChallengesRoute
+  AdminAdminCommunityRoute: typeof AdminAdminCommunityRoute
+  AdminAdminOverviewRoute: typeof AdminAdminOverviewRoute
+  AdminAdminProgramsRoute: typeof AdminAdminProgramsRoute
+  AdminAdminUsersRoute: typeof AdminAdminUsersRoute
+}
+
+const AdminAdminRouteChildren: AdminAdminRouteChildren = {
+  AdminAdminAnalyticsRoute: AdminAdminAnalyticsRoute,
+  AdminAdminChallengesRoute: AdminAdminChallengesRoute,
+  AdminAdminCommunityRoute: AdminAdminCommunityRoute,
+  AdminAdminOverviewRoute: AdminAdminOverviewRoute,
+  AdminAdminProgramsRoute: AdminAdminProgramsRoute,
+  AdminAdminUsersRoute: AdminAdminUsersRoute,
+}
+
+const AdminAdminRouteWithChildren = AdminAdminRoute._addFileChildren(
+  AdminAdminRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminAdminRoute: typeof AdminAdminRouteWithChildren
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdminRoute: AdminAdminRouteWithChildren,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AppRouteChildren {
   AppChallengesRoute: typeof AppChallengesRoute
@@ -357,6 +537,7 @@ const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AppRoute: AppRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,

@@ -165,6 +165,7 @@ export type Database = {
         Row: {
           content: string
           created_at: string
+          flag_count: number
           id: string
           image_url: string | null
           likes_count: number
@@ -174,6 +175,7 @@ export type Database = {
         Insert: {
           content: string
           created_at?: string
+          flag_count?: number
           id?: string
           image_url?: string | null
           likes_count?: number
@@ -183,6 +185,7 @@ export type Database = {
         Update: {
           content?: string
           created_at?: string
+          flag_count?: number
           id?: string
           image_url?: string | null
           likes_count?: number

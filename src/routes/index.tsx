@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import heroImg from "@/assets/hero-athlete.jpg";
+const heroImg = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1600&q=80";
 import strengthImg from "@/assets/program-strength.jpg";
 import hiitImg from "@/assets/program-hiit.jpg";
 import mobilityImg from "@/assets/program-mobility.jpg";
@@ -63,10 +63,12 @@ function Hero() {
       <div className="absolute inset-0 -z-10">
         <img
           src={heroImg}
-          alt="BODYMESH athlete training"
-          className="h-full w-full object-cover"
-          width={1920}
-          height={1080}
+          alt="BODYMESH athlete training in a fitness studio"
+          className="h-full w-full object-cover object-[center_30%]"
+          width={1600}
+          height={1067}
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-hero" />
       </div>
