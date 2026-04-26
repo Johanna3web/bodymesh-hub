@@ -121,9 +121,9 @@ function ProgramsPage() {
                       <span className="capitalize">{p.duration_weeks}w · {p.difficulty}</span>
                     </div>
                     <div className="mt-4">
-                      <Button size="sm" className="w-full bg-foreground text-background hover:bg-foreground/90">
+                      <div className="flex w-full items-center justify-center rounded-md bg-foreground px-3 py-2 text-xs font-medium text-background">
                         <Play className="mr-2 h-3 w-3" /> View program
-                      </Button>
+                      </div>
                     </div>
                   </div>
                 </Link>
