@@ -211,8 +211,12 @@ function ProgramDetailPage() {
                   <CheckCircle2 className="mr-2 h-4 w-4" /> Enrolled
                 </Badge>
               ) : locked ? (
-                <Button size="lg" variant="outline" disabled>
-                  <Lock className="mr-2 h-4 w-4" /> Premium required
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => toast.info("Premium checkout is coming soon — PayFast integration is on the way.")}
+                >
+                  <Lock className="mr-2 h-4 w-4" /> Unlock with Premium
                 </Button>
               ) : (
                 <Button
