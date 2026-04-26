@@ -16,6 +16,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
+import { LazyVideo } from "@/components/LazyVideo";
 
 interface Exercise {
   name: string;
@@ -302,6 +303,11 @@ function ProgramDetailPage() {
                         </AccordionTrigger>
                         <AccordionContent>
                           {w.description && <p className="mb-4 text-sm text-muted-foreground">{w.description}</p>}
+                          {w.video_url && (
+                            <div className="mb-4">
+                              <LazyVideo src={w.video_url} title={w.title} poster={w.thumbnail_url} />
+                            </div>
+                          )}
                           <div className="space-y-2">
                             {exercises.map((ex, i) => (
                               <div key={i} className="flex items-center justify-between rounded-md bg-muted/50 px-4 py-3 text-sm">
