@@ -1,0 +1,25 @@
+{
+  "name": "BODYMESH — Active Lifestyle",
+  "short_name": "BODYMESH",
+  "description": "Train, track, and belong. Premium fitness programs, challenges, and community.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F0D0C",
+  "theme_color": "#0F0D0C",
+  "categories": ["fitness", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
