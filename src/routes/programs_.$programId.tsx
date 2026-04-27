@@ -26,7 +26,7 @@ interface Exercise {
   notes?: string;
 }
 
-export const Route = createFileRoute("/programs/$programId")({
+export const Route = createFileRoute("/programs_/$programId")({
   loader: async ({ params }) => {
     const { data: program } = await supabase
       .from("programs")
