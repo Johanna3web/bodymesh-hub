@@ -18,7 +18,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProgramsProgramIdRouteImport } from './routes/programs.$programId'
+import { Route as ProgramsProgramIdRouteImport } from './routes/programs_.$programId'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
@@ -78,9 +78,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramsProgramIdRoute = ProgramsProgramIdRouteImport.update({
-  id: '/$programId',
-  path: '/$programId',
-  getParentRoute: () => ProgramsRoute,
+  id: '/programs_/$programId',
+  path: '/programs/$programId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AppProgressRoute = AppProgressRouteImport.update({
   id: '/progress',
@@ -219,7 +219,7 @@ export interface FileRoutesById {
   '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/profile': typeof AppProfileRoute
   '/_app/progress': typeof AppProgressRoute
-  '/programs/$programId': typeof ProgramsProgramIdRoute
+  '/programs_/$programId': typeof ProgramsProgramIdRoute
   '/_admin/admin/analytics': typeof AdminAdminAnalyticsRoute
   '/_admin/admin/challenges': typeof AdminAdminChallengesRoute
   '/_admin/admin/community': typeof AdminAdminCommunityRoute
@@ -294,7 +294,7 @@ export interface FileRouteTypes {
     | '/_app/onboarding'
     | '/_app/profile'
     | '/_app/progress'
-    | '/programs/$programId'
+    | '/programs_/$programId'
     | '/_admin/admin/analytics'
     | '/_admin/admin/challenges'
     | '/_admin/admin/community'
@@ -313,6 +313,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
   StoreRoute: typeof StoreRoute
+  ProgramsProgramIdRoute: typeof ProgramsProgramIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -380,12 +381,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/programs/$programId': {
-      id: '/programs/$programId'
-      path: '/$programId'
+    '/programs_/$programId': {
+      id: '/programs_/$programId'
+      path: '/programs/$programId'
       fullPath: '/programs/$programId'
       preLoaderRoute: typeof ProgramsProgramIdRouteImport
-      parentRoute: typeof ProgramsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/_app/progress': {
       id: '/_app/progress'
@@ -542,12 +543,10 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface ProgramsRouteChildren {
   ProgramsRoute: typeof ProgramsRoute
-  ProgramsProgramIdRoute: typeof ProgramsProgramIdRoute
 }
 
 const ProgramsRouteChildren: ProgramsRouteChildren = {
   ProgramsRoute: ProgramsRoute,
-  ProgramsProgramIdRoute: ProgramsProgramIdRoute,
 }
 
 const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
@@ -564,6 +563,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
   StoreRoute: StoreRoute,
+  ProgramsProgramIdRoute: ProgramsProgramIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
