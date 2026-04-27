@@ -43,6 +43,12 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "BODYMESH" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "BODYMESH — Active Lifestyle" },
+      { name: "twitter:title", content: "BODYMESH — Active Lifestyle" },
+      { property: "og:description", content: "The fitness ecosystem behind the activewear. Programs, challenges, community." },
+      { name: "twitter:description", content: "The fitness ecosystem behind the activewear. Programs, challenges, community." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/958ba0e2-1d20-4dc3-8832-ae3223062d8b/id-preview-2154c750--4ef41cf5-b830-42ab-a6f2-7e9a647d8eac.lovable.app-1777285217584.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/958ba0e2-1d20-4dc3-8832-ae3223062d8b/id-preview-2154c750--4ef41cf5-b830-42ab-a6f2-7e9a647d8eac.lovable.app-1777285217584.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
