@@ -12,12 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as StoreRouteImport } from './routes/store'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
 import { Route as ProgramsProgramIdRouteImport } from './routes/programs.$programId'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
@@ -26,6 +26,7 @@ import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCommunityRouteImport } from './routes/_app.community'
 import { Route as AppChallengesRouteImport } from './routes/_app.challenges'
 import { Route as AdminAdminRouteImport } from './routes/_admin.admin'
+import { Route as ProgramsRouteImport } from './routes/programs.'
 import { Route as AdminAdminUsersRouteImport } from './routes/_admin.admin.users'
 import { Route as AdminAdminProgramsRouteImport } from './routes/_admin.admin.programs'
 import { Route as AdminAdminOverviewRouteImport } from './routes/_admin.admin.overview'
@@ -46,6 +47,11 @@ const SignupRoute = SignupRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsRoute = ProgramsRouteImport.update({
+  id: '/programs',
+  path: '/programs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -69,11 +75,6 @@ const AdminRoute = AdminRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
-  id: '/programs/',
-  path: '/programs/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramsProgramIdRoute = ProgramsProgramIdRouteImport.update({
@@ -116,6 +117,11 @@ const AdminAdminRoute = AdminAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AdminRoute,
 } as any)
+const ProgramsRoute = ProgramsRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProgramsRoute,
+} as any)
 const AdminAdminUsersRoute = AdminAdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -151,9 +157,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/programs': typeof ProgramsRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/programs/': typeof ProgramsRoute
   '/admin': typeof AdminAdminRouteWithChildren
   '/challenges': typeof AppChallengesRoute
   '/community': typeof AppCommunityRoute
@@ -162,7 +170,6 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AppProfileRoute
   '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
-  '/programs/': typeof ProgramsIndexRoute
   '/admin/analytics': typeof AdminAdminAnalyticsRoute
   '/admin/challenges': typeof AdminAdminChallengesRoute
   '/admin/community': typeof AdminAdminCommunityRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/programs': typeof ProgramsRoute
   '/admin': typeof AdminAdminRouteWithChildren
   '/challenges': typeof AppChallengesRoute
   '/community': typeof AppCommunityRoute
@@ -185,7 +193,6 @@ export interface FileRoutesByTo {
   '/profile': typeof AppProfileRoute
   '/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
-  '/programs': typeof ProgramsIndexRoute
   '/admin/analytics': typeof AdminAdminAnalyticsRoute
   '/admin/challenges': typeof AdminAdminChallengesRoute
   '/admin/community': typeof AdminAdminCommunityRoute
@@ -200,9 +207,11 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/programs': typeof ProgramsRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/store': typeof StoreRoute
+  '/programs/': typeof ProgramsRoute
   '/_admin/admin': typeof AdminAdminRouteWithChildren
   '/_app/challenges': typeof AppChallengesRoute
   '/_app/community': typeof AppCommunityRoute
@@ -211,7 +220,6 @@ export interface FileRoutesById {
   '/_app/profile': typeof AppProfileRoute
   '/_app/progress': typeof AppProgressRoute
   '/programs/$programId': typeof ProgramsProgramIdRoute
-  '/programs/': typeof ProgramsIndexRoute
   '/_admin/admin/analytics': typeof AdminAdminAnalyticsRoute
   '/_admin/admin/challenges': typeof AdminAdminChallengesRoute
   '/_admin/admin/community': typeof AdminAdminCommunityRoute
@@ -225,9 +233,11 @@ export interface FileRouteTypes {
     | '/'
     | '/forgot-password'
     | '/login'
+    | '/programs'
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/programs/'
     | '/admin'
     | '/challenges'
     | '/community'
@@ -236,7 +246,6 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/programs/$programId'
-    | '/programs/'
     | '/admin/analytics'
     | '/admin/challenges'
     | '/admin/community'
@@ -251,6 +260,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/programs'
     | '/admin'
     | '/challenges'
     | '/community'
@@ -259,7 +269,6 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/programs/$programId'
-    | '/programs'
     | '/admin/analytics'
     | '/admin/challenges'
     | '/admin/community'
@@ -273,9 +282,11 @@ export interface FileRouteTypes {
     | '/_app'
     | '/forgot-password'
     | '/login'
+    | '/programs'
     | '/reset-password'
     | '/signup'
     | '/store'
+    | '/programs/'
     | '/_admin/admin'
     | '/_app/challenges'
     | '/_app/community'
@@ -284,7 +295,6 @@ export interface FileRouteTypes {
     | '/_app/profile'
     | '/_app/progress'
     | '/programs/$programId'
-    | '/programs/'
     | '/_admin/admin/analytics'
     | '/_admin/admin/challenges'
     | '/_admin/admin/community'
@@ -299,10 +309,10 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
+  ProgramsRoute: typeof ProgramsRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
   StoreRoute: typeof StoreRoute
-  ProgramsIndexRoute: typeof ProgramsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -326,6 +336,13 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs': {
+      id: '/programs'
+      path: '/programs'
+      fullPath: '/programs'
+      preLoaderRoute: typeof ProgramsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -361,13 +378,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/programs/': {
-      id: '/programs/'
-      path: '/programs'
-      fullPath: '/programs/'
-      preLoaderRoute: typeof ProgramsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programs/$programId': {
@@ -425,6 +435,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AdminAdminRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/programs/': {
+      id: '/programs/'
+      path: '/'
+      fullPath: '/programs/'
+      preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof ProgramsRoute
     }
     '/_admin/admin/users': {
       id: '/_admin/admin/users'
@@ -523,16 +540,30 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface ProgramsRouteChildren {
+  ProgramsRoute: typeof ProgramsRoute
+  ProgramsProgramIdRoute: typeof ProgramsProgramIdRoute
+}
+
+const ProgramsRouteChildren: ProgramsRouteChildren = {
+  ProgramsRoute: ProgramsRoute,
+  ProgramsProgramIdRoute: ProgramsProgramIdRoute,
+}
+
+const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
+  ProgramsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   AppRoute: AppRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
+  ProgramsRoute: ProgramsRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
   StoreRoute: StoreRoute,
-  ProgramsIndexRoute: ProgramsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

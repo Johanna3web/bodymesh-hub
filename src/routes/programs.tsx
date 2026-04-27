@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/programs/")({
+export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
       { title: "Programs — BODYMESH" },
