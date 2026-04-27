@@ -240,6 +240,72 @@ export type Database = {
           },
         ]
       }
+      payment_settings: {
+        Row: {
+          id: boolean
+          payfast_mode: string
+          updated_at: string
+        }
+        Insert: {
+          id?: boolean
+          payfast_mode?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: boolean
+          payfast_mode?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          item_id: string | null
+          item_type: string
+          m_payment_id: string
+          mode: string
+          payload: Json | null
+          pf_payment_id: string | null
+          plan: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          item_type: string
+          m_payment_id: string
+          mode?: string
+          payload?: Json | null
+          pf_payment_id?: string | null
+          plan?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          item_type?: string
+          m_payment_id?: string
+          mode?: string
+          payload?: Json | null
+          pf_payment_id?: string | null
+          plan?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       post_likes: {
         Row: {
           created_at: string
@@ -290,6 +356,8 @@ export type Database = {
           points: number
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
+          subscription_expires_at: string | null
+          subscription_plan: string | null
           subscription_status: string | null
           updated_at: string
         }
@@ -306,6 +374,8 @@ export type Database = {
           points?: number
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
+          subscription_expires_at?: string | null
+          subscription_plan?: string | null
           subscription_status?: string | null
           updated_at?: string
         }
@@ -322,6 +392,8 @@ export type Database = {
           points?: number
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
+          subscription_expires_at?: string | null
+          subscription_plan?: string | null
           subscription_status?: string | null
           updated_at?: string
         }
